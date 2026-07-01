@@ -1,0 +1,8 @@
+[phases.setup]
+nixPkgs = ['...', 'php82', 'nodejs_20'] # Sesuaikan versi PHP & Node Anda
+
+[phases.build]
+cmds = ['composer install --no-dev', 'npm ci', 'npm run build']
+
+[start]
+cmd = 'php artisan serve --host 0.0.0.0 --port $PORT'
