@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ['...', 'php82', 'nodejs_20'] # Sesuaikan versi PHP & Node Anda
+nixPkgs = ['...', 'php82', 'nodejs_20'] # Memaksa Railway pakai PHP 8.2 dan Node 20
 
 [phases.build]
 cmds = ['composer install --no-dev', 'npm ci', 'npm run build']
