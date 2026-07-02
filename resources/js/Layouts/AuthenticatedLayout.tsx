@@ -13,10 +13,10 @@ export default function Authenticated({ user, children }: PropsWithChildren<Auth
 
     // Definisikan menu navigasi terpusat
     const menuItems = [
-        { route: route('dashboard'), label: 'Beranda', icon: '🏠', name: 'dashboard' },
-        { route: route('incomes.create'), label: 'Uang Masuk', icon: '💰', name: 'incomes.create' },
-        { route: route('expenses.upload'), label: 'Uang Keluar', icon: '📸', name: 'expenses.upload' },
-        { route: route('expenses.report'), label: 'Reporting', icon: '📉', name: 'expenses.report' },
+        { route: '/dashboard', label: 'Beranda', icon: '🏠', name: 'dashboard' },
+        { route: '/incomes/create', label: 'Uang Masuk', icon: '💰', name: 'incomes.create' },
+        { route: '/expenses/upload', label: 'Uang Keluar', icon: '📸', name: 'expenses.upload' },
+        { route: '/report', label: 'Reporting', icon: '📉', name: 'expenses.report' },
     ];
 
     return (
