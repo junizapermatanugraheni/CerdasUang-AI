@@ -296,7 +296,14 @@ export default function Upload({ auth, invoices, categories }: any) {
                                 {imagePreview ? <img src={imagePreview} alt="Preview" className="mb-4 max-h-48 rounded object-cover" /> : <p className="mb-4 text-sm text-gray-500 text-center">Format file: JPG, PNG, PDF</p>}
                                 <label className="cursor-pointer rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500">
                                     Pilih File
-                                    <input type="file" accept="image/*,application/pdf" className="hidden" onChange={handleFileChange} />
+                                    {/* <input type="file" accept="image/*,application/pdf" className="hidden" onChange={handleFileChange} /> */}
+                                    <input
+                                        type="file"
+                                        accept="image/*"    // 🛠️ Jika fokusnya Nota AI, sebaiknya amankan ke image/* saja dulu demi performa OCR AI
+                                        capture="environment" // 🛠️ Memaksa HP otomatis membuka kamera belakang saat diklik
+                                        className="hidden"
+                                        onChange={handleFileChange}
+                                    />
                                 </label>
                             </div>
                             <div className="flex justify-end space-x-2 pt-2">
