@@ -1,5 +1,5 @@
 import React, { FormEvent } from 'react';
-import { useForm, Head } from '@inertiajs/react';
+import { useForm, Head, Link } from '@inertiajs/react';
 
 export default function Login() {
     // Setup form Inertia untuk autentikasi
@@ -24,7 +24,7 @@ export default function Login() {
                 {/* HEADER LOGO/NAMA APLIKASI */}
                 <div className="text-center">
                     <div className="mx-auto h-12 w-12 rounded-lg bg-indigo-600 flex items-center justify-center text-white text-xl font-bold shadow-md">
-                        Rp
+                        CU
                     </div>
                     <h2 className="mt-4 text-3xl font-extrabold text-gray-900 tracking-tight">
                         CerdasUang AI
@@ -82,6 +82,16 @@ export default function Login() {
                         </div>
                     </div>
 
+                    <p className="text-sm text-gray-600">
+                        Belum punya akun?{' '}
+                        <Link
+                            href={route('register')}
+                            className="text-indigo-600 hover:text-indigo-500 font-medium underline"
+                        >
+                            Daftar di sini
+                        </Link>
+                    </p>
+
                     {/* BUTTON SUBMIT */}
                     <div>
                         <button
@@ -89,7 +99,7 @@ export default function Login() {
                             disabled={processing}
                             className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-gray-400 transition-colors duration-200"
                         >
-                            {processing ? 'Membuka Dasbor...' : 'Masuk Masuk'}
+                            {processing ? 'Membuka Dasbor...' : 'Login'}
                         </button>
                     </div>
                 </form>
