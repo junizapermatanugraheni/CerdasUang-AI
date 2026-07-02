@@ -37,11 +37,27 @@ export default function Upload({ auth, invoices, categories }: any) {
     });
 
     // Handler AI Upload
+    // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     const file = e.target.files?.[0];
+    //     if (file) {
+    //         setImagePreview(URL.createObjectURL(file));
+    //         uploadForm.setData('document', file);
+    //     }
+    // };
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
-            setImagePreview(URL.createObjectURL(file));
+            // 1. Simpan file asli ke state Form Inertia (nama field: 'document')
             uploadForm.setData('document', file);
+
+            // 2. Cek tipe file untuk keperluan Preview di Modal
+            if (file.type === 'application/pdf') {
+                // Jika PDF, jangan buat URL objek gambar agar browser HP tidak crash
+                setImagePreview('pdf-mode');
+            } else {
+                // Jika benar-benar gambar (PNG/JPG/WebP), buat preview-nya
+                setImagePreview(URL.createObjectURL(file));
+            }
         }
     };
 
@@ -293,10 +309,32 @@ export default function Upload({ auth, invoices, categories }: any) {
                         <h3 className="mb-4 text-lg font-bold text-gray-900">Scan Nota Baru 📸</h3>
                         <form onSubmit={handleUploadSubmit} className="space-y-4">
                             <div className="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 p-6 rounded-lg bg-gray-50">
-                                {imagePreview ? <img src={imagePreview} alt="Preview" className="mb-4 max-h-48 rounded object-cover" /> : <p className="mb-4 text-sm text-gray-500 text-center">Format file: JPG, PNG, PDF</p>}
+                                {/* 🛠️ LOGIKA KONDISIONAL PREVIEW */}
+                                {imagePreview === 'pdf-mode' ? (
+                                    // Tampilan khusus jika yang dipilih adalah file PDF
+                                    <div className="mb-4 flex flex-col items-center p-3 bg-red-50 border border-red-200 rounded-lg text-center">
+                                        <span className="text-4xl mb-1">📄</span>
+                                        <p className="text-xs font-semibold text-red-700 truncate max-w-[200px]">
+                                            {uploadForm.data.document?.name || 'Dokumen.pdf'}
+                                        </p>
+                                        <p className="text-[10px] text-gray-400 mt-0.5">Format PDF siap diekstrak AI</p>
+                                    </div>
+                                ) : imagePreview ? (
+                                    // Tampilan jika yang dipilih adalah Gambar biasa (JPG/PNG)
+                                    <img src={imagePreview} alt="Preview" className="mb-4 max-h-48 rounded object-cover" />
+                                ) : (
+                                    // Tampilan default jika belum ada file yang dipilih
+                                    <p className="mb-4 text-sm text-gray-500 text-center">Format file: JPG, PNG, PDF</p>
+                                )}
+
                                 <label className="cursor-pointer rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500">
-                                    Pilih File
-                                    <input type="file" accept="image/*,application/pdf" className="hidden" onChange={handleFileChange} />
+                                    {imagePreview ? 'Ganti File 🔄' : 'Pilih File'}
+                                    <input
+                                        type="file"
+                                        accept="image/*,application/pdf"
+                                        className="hidden"
+                                        onChange={handleFileChange}
+                                    />
                                 </label>
                             </div>
                             <div className="flex justify-end space-x-2 pt-2">
