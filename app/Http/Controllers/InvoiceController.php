@@ -89,7 +89,7 @@ class InvoiceController extends Controller
     public function upload(Request $request)
     {
         $request->validate([
-            'document' => 'required|image|mimes:jpeg,png,jpg|max:10240', // Naikkan ke 10MB
+            'document' => 'required|image|mimes:jpeg,png,jpg,webp,heic|max:10240', // Naikkan ke 10MB
         ]);
 
         // 1. Simpan gambar terlebih dahulu
