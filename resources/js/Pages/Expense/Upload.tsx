@@ -139,7 +139,7 @@ export default function Upload({ auth, invoices, categories }: any) {
                             <h3 className="text-lg font-medium text-gray-900">Daftar Pengeluaran Terdeteksi</h3>
 
                             {/* Tombol Aksi Desktop */}
-                            <div className="hidden sm:flex space-x-2">
+                            <div className="flex space-x-2">
                                 <button
                                     onClick={() => setIsManualOpen(true)}
                                     className="inline-flex items-center rounded-md bg-white border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700 shadow-sm hover:bg-gray-50 transition"
@@ -252,9 +252,6 @@ export default function Upload({ auth, invoices, categories }: any) {
                                                 {invoice.image_path ? '📸 AI' : '✍️ Manual'} • {invoice.transaction_date ? new Date(invoice.transaction_date).toLocaleDateString('id-ID', { day: 'numeric', month: 'short' }) : '-'}
                                             </span>
                                         </div>
-                                        <div className="flex flex-col items-end space-y-1">
-                                            <span className="font-extrabold text-indigo-600 text-sm">Rp {Number(invoice.total_amount).toLocaleString('id-ID')}</span>
-                                        </div>
                                         {/* Bagian Kanan: Harga + Tombol Sampah */}
                                         <div className="flex items-center gap-3">
                                             <span className="font-extrabold text-indigo-600 text-sm">Rp {Number(invoice.total_amount).toLocaleString('id-ID')}</span>
@@ -283,10 +280,10 @@ export default function Upload({ auth, invoices, categories }: any) {
             <Toaster position='top-right' reverseOrder={false} />
 
             {/* Floating Buttons Mobile */}
-            <div className="sm:hidden fixed bottom-6 right-6 flex flex-col space-y-2 z-40">
+            {/* <div className="sm:hidden fixed bottom-10 right-6 flex flex-col space-y-2 z-40">
                 <button onClick={() => setIsManualOpen(true)} className="w-12 h-12 bg-white text-gray-700 border border-gray-300 rounded-full shadow-lg flex items-center justify-center text-xl font-bold">✍️</button>
-                <button onClick={() => setIsUploadOpen(true)} className="w-14 h-14 bg-indigo-600 text-white rounded-full shadow-2xl flex items-center justify-center text-2xl font-bold">📸</button>
-            </div>
+                <button onClick={() => setIsUploadOpen(true)} className="w-12 h-12 bg-white text-gray-700 border border-gray-300 rounded-full shadow-lg flex items-center justify-center text-xl font-bold">📸</button>
+            </div> */}
 
             {/* MODAL 1: SCAN NOTA DENGAN AI */}
             {isUploadOpen && (

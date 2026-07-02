@@ -34,6 +34,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        if (config('app.env') === 'production' || env('TRACK_ENV') === 'production') {
+            // Paksa langsung belok ke Dashboard HTTPS milik Railway tanpa membawa memori HTTP lama
+            return redirect()->to('https://cerdasuang-ai.up.railway.app/dashboard');
+        }
+
+        // Untuk di laptop lokal (development), tetap gunakan rute bawaan agar tidak eror
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
