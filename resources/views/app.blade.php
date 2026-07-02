@@ -12,15 +12,21 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
-    @if (config('app.env') === 'production')
-        @routes(null, ['absolute' => true, 'protocol' => 'https'])
-    @else
-        @routes
-    @endif
+    @if(config('app.env') === 'production')
+            @routes(null, null) 
+            <script>
+                // Memaksa Ziggy menggunakan HTTPS di sisi browser secara global
+                if (typeof Ziggy !== 'undefined') {
+                    Ziggy.url = Ziggy.url.replace('http://', 'https://');
+                }
+            </script>
+        @else
+            @routes
+        @endif
 
-    @viteReactRefresh
-    @vite(['resources/js/app.tsx', "resources/js/Pages/{$page['component']}.tsx"])
-    @inertiaHead
+        @viteReactRefresh
+        @vite(['resources/js/app.tsx', "resources/js/Pages/{$page['component']}.tsx"])
+        @inertiaHead
 </head>
 
 <body class="font-sans antialiased">
