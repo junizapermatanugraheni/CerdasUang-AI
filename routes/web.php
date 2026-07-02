@@ -28,15 +28,16 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return redirect()->route('login');
 });
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+    Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+
+    Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
+    Route::post('/register', [RegisteredUserController::class, 'store']);
+});
 
 // 🔒 2. GABUNGAN RUTE HALAMAN WEB INERTIA (Butuh Login & Verifikasi)
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
-    Route::post('/login', [AuthenticatedSessionController::class, 'store']);
-    
-    // 🛠️ PASTIKAN BARIS INI SUDAH ADA
-    Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
-    Route::post('/register', [RegisteredUserController::class, 'store']);
 
     // 📊 Dashboard Utama
     Route::get('/dashboard', [InvoiceController::class, 'index'])->name('dashboard');
