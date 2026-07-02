@@ -85,7 +85,7 @@ export default function Login() {
                     <p className="text-sm text-gray-600">
                         Belum punya akun?{' '}
                         <Link
-                            href={route('register')}
+                            href="/register" // 🛠️ UBAH DARI href={route('register')} MENJADI "/register"
                             className="text-indigo-600 hover:text-indigo-500 font-medium underline"
                         >
                             Daftar di sini

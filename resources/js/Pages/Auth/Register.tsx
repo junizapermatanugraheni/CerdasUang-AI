@@ -132,8 +132,8 @@ export default function Register() {
                         <p className="text-sm text-slate-600">
                             Sudah punya akun?{' '}
                             <Link
-                                href={route('login')}
-                                className="font-semibold text-indigo-600 hover:text-indigo-500 transition-colors underline decoration-2 decoration-indigo-100 hover:decoration-indigo-500"
+                                href="/login" // 🛠️ UBAH DARI href={route('login')} MENJADI "/login"
+                                className="font-semibold text-indigo-600 hover:text-indigo-500 transition-colors underline"
                             >
                                 Masuk di sini
                             </Link>
