@@ -41,7 +41,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/incomes', [InvoiceController::class, 'storeIncome'])->name('incomes.store');
 
     // Fitur Update Income
-    Route::patch('/incomes/{id}', [InvoiceController::class, 'updateIncome'])->name('incomes.update');
+    // Route::patch('/incomes/{id}', [InvoiceController::class, 'updateIncome'])->name('incomes.update');
 
     // Fitur Delete Income
     Route::delete('/incomes/{id}', [InvoiceController::class, 'destroyIncome'])->name('incomes.destroy');
